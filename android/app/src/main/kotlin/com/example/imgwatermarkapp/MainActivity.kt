@@ -1,4 +1,4 @@
-package com.example.minerva
+package com.example.imgwatermarkapp
 
 import io.flutter.embedding.android.FlutterActivity
 

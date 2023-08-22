@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:water_image_picker/homepage.dart';
+import 'package:imgwatermarkapp/homepage.dart';
 
 void main() {
   runApp(const MyApp());

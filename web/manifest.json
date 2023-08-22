@@ -1,6 +1,6 @@
 {
-    "name": "minerva",
-    "short_name": "minerva",
+    "name": "imgwatermarkapp",
+    "short_name": "imgwatermarkapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

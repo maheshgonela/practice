@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "water_image_picker" "\0"
+            VALUE "FileDescription", "imgwatermarkapp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "water_image_picker" "\0"
+            VALUE "InternalName", "imgwatermarkapp" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "water_image_picker.exe" "\0"
-            VALUE "ProductName", "water_image_picker" "\0"
+            VALUE "OriginalFilename", "imgwatermarkapp.exe" "\0"
+            VALUE "ProductName", "imgwatermarkapp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

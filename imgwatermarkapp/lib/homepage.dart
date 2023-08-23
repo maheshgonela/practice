@@ -21,73 +21,61 @@ class HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   String watermarkText = "", imgname = "image not selected";
   List<bool> textOrImage = [true, false];
+  bool isProcessing = false;
 
   pickImage() async {
     final image = await _picker.pickImage(
       source: ImageSource.camera,
     );
+
     if (image != null) {
+      setState(() {
+        isProcessing = true;
+      });
+
       _image = image;
       var t = await image.readAsBytes();
       imgBytes = Uint8List.fromList(t);
+
+      watermarkedImgBytes = await ImageWatermark.addTextWatermark(
+        imgBytes: imgBytes!,
+        watermarkText: 'Your Watermark Text',
+        dstX: 100,
+        dstY: 100,
+        color: const Color.fromARGB(255, 238, 16, 16),
+      );
+
+      setState(() {
+        isProcessing = false;
+      });
     }
-    watermarkedImgBytes = await ImageWatermark.addTextWatermark(
-      ///image bytes
-      imgBytes: imgBytes!,
-
-      ///watermark text
-      watermarkText: 'ddgfgfhgfhghfghjhgjdfsfdsfdfdsfdsfdsfdsf',
-      dstX: 100,
-      dstY: 100,
-      color: const Color.fromARGB(255, 238, 16, 16),
-    );
-  }
-
-  pickImage2() async {
-    XFile? image = await _picker.pickImage(
-      source: ImageSource.camera,
-    );
-    if (image != null) {
-      _image = image;
-      imgname = image.name;
-      var t = await image.readAsBytes();
-      imgBytes2 = Uint8List.fromList(t);
-    }
-
-    setState(() {});
-  }
-
-  notnull() {
-    if (watermarkedImgBytes != null) {
-      setState(() {});
-    }
-  }
-
-  @override
-  void initState() {
-    notnull();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('image_watermark'),
+        backgroundColor: const Color.fromARGB(255, 2, 87, 92),
+        title: const Text('Watermark Generator'),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: 400,
               height: 400,
-              child: watermarkedImgBytes == null
-                  ? const FlutterLogo(
-                      size: 100,
-                    )
-                  : Image.memory(watermarkedImgBytes!, fit: BoxFit.contain),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  imgBytes == null
+                      ? const FlutterLogo(size: 100)
+                      : Image.memory(watermarkedImgBytes!, fit: BoxFit.contain),
+                  if (isProcessing)
+                    const CircularProgressIndicator(), // Show loading indicator
+                ],
+              ),
             ),
             TextButton(onPressed: pickImage, child: const Text('camera')),
           ],
